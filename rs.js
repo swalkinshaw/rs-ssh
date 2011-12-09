@@ -1,17 +1,36 @@
-function bind_ssh() {
-  jQuery('a[href*="managed_ssh"]').click(function (e) {
-    var $public_dns = jQuery(this).parent().parent().parent().find('td[data-column_name="Public DNS"] a');
-    window.location = 'ssh://root@' + jQuery.trim($public_dns.text());
-    return false;
-  });
-}
+(function() {
+  var address, bind_ssh_handler, dom_ref, init, retry_rate, ssh_button, username, __;
 
-function content_loaded() {
-  if (document.getElementsByClassName('icon_ssh').length > 0) {
-    bind_ssh();
-  } else {
-    setTimeout(content_loaded, 100);
-  }
-};
+  __ = Zepto;
 
-content_loaded();
+  username = 'root';
+
+  address = 'td[data-column_name="Public DNS"] a';
+
+  ssh_button = 'a[href*="managed_ssh"]';
+
+  dom_ref = '.icon_ssh';
+
+  retry_rate = 100;
+
+  init = function() {
+    if (__(dom_ref).length) {
+      return bind_ssh_handler();
+    } else {
+      return setTimeout(init, retry_rate);
+    }
+  };
+
+  bind_ssh_handler = function() {
+    return __(ssh_button).on('click', function(e) {
+      var host;
+      e.preventDefault();
+      e.stopPropagation();
+      host = __(this).closest('tr').find(address).text().trim();
+      return window.location = "ssh://" + username + "@" + host;
+    });
+  };
+
+  init();
+
+}).call(this);

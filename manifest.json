@@ -1,0 +1,24 @@
+{
+  "name": "RightScale SSH",
+  "version": "1.0",
+  "description": "Provides an ssh:// protocol link for the SSH button on the RightScale control panel.",
+  "background_page": "background.html",
+  "content_scripts": [
+    {
+      "matches": ["https://my.rightscale.com/*"],
+      "js": ["jquery.js", "rs.js"]
+    }
+  ],
+  "permissions": [
+    "tabs"
+  ],
+  "page_action": {
+    "default_icon": "icons/page.png",
+    "default_name": "RightScale SSH"
+  },
+  "icons": {
+    "16": "icons/small.png",
+    "48": "icons/medium.png",
+    "128": "icons/large.png"
+  }
+}

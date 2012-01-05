@@ -1,5 +1,5 @@
 (function() {
-  var address, bind_ssh_handler, dom_ref, init, retry_rate, ssh_button, username, __;
+  var address, bind_ssh_handler, dom_check, dom_ref, init, retry_rate, setup, ssh_button, username, __;
 
   __ = Zepto;
 
@@ -14,20 +14,33 @@
   retry_rate = 100;
 
   init = function() {
-    if (__(dom_ref).length) {
-      return bind_ssh_handler();
+    if (dom_check()) {
+      return setup();
     } else {
       return setTimeout(init, retry_rate);
     }
   };
 
+  dom_check = function() {
+    return __(dom_ref).length;
+  };
+
+  setup = function() {
+    bind_ssh_handler();
+    return __('body').on('DOMNodeInserted', function(e) {
+      if (dom_check()) {
+        return __(ssh_button).removeAttr('data-behaves' && bind_ssh_handler());
+      }
+    });
+  };
+
   bind_ssh_handler = function() {
-    return __(ssh_button).on('click', function(e) {
+    __(ssh_button).removeAttr('data-behaves');
+    return __('body').on('click', ssh_button, function(e) {
       var host;
-      e.preventDefault();
-      e.stopPropagation();
       host = __(this).closest('tr').find(address).text().trim();
-      return window.location = "ssh://" + username + "@" + host;
+      window.location = "ssh://" + username + "@" + host;
+      return false;
     });
   };
 

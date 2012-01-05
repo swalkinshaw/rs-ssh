@@ -1,6 +1,6 @@
 {
   "name": "RightScale SSH",
-  "version": "1.0",
+  "version": "1.5",
   "description": "Provides an ssh:// protocol link for the SSH button on the RightScale control panel.",
   "content_scripts": [
     {

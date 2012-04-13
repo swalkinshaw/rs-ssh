@@ -4,7 +4,7 @@
   "description": "Provides an ssh:// protocol link for the SSH button on the RightScale control panel.",
   "content_scripts": [
     {
-      "matches": ["https://my.rightscale.com/*"],
+      "matches": ["https://*.rightscale.com/*"],
       "js": ["zepto.min.js", "rs.js"]
     }
   ],

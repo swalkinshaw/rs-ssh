@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "RightScale SSH",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Provides an ssh:// protocol link for the SSH button on the RightScale control panel.",
   "content_scripts": [
     {
